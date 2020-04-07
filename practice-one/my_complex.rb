@@ -1,30 +1,25 @@
+# frozen_string_literal: true
+
+# Complex class
 class MyComplex
-    def initialize(real, imaginary)
-        @real = real
-        @imaginary = imaginary
-    end
+  def initialize(real, imaginary)
+    @real = real
+    @imaginary = imaginary
+  end
 
-    def to_s
-        "#{@real} + i*#{@imaginary}"
-    end
+  def to_s
+    "#{@real} + i*#{@imaginary}"
+  end
 
-    def real
-        @real 
-    end
+  attr_reader :real
 
-    def imaginary
-        @imaginary
-    end
+  attr_reader :imaginary
 
-    def real=(real)
-        @real = real
-    end
+  attr_writer :real
 
-    def imaginary=(imaginary)
-        @imaginary = imaginary
-    end
+  attr_writer :imaginary
 
-    def add(c)
-        MyComplex.new(real + c.real, imaginary + c.imaginary)
-    end
+  def add(new_one)
+    MyComplex.new(real + new_one.real, imaginary + new_one.imaginary)
+  end
 end
