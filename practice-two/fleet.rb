@@ -1,68 +1,63 @@
+# frozen_string_literal: true
+
+# My comment
 class Fleet
-    def initialize
-        @cars = []
-    end
+  def initialize
+    @cars = []
+  end
 
-    def add(c)
-        cars.append(c)
-    end
+  def add(new_one)
+    cars.append(new_one)
+  end
 
-    def cars
-        @cars
-    end
+  attr_reader :cars
 
-    def load_from_file(file_name)
-        require 'json'
-        json_data = File.read(file_name)
-        ruby_objects = JSON.parse(json_data)
-        for i in ruby_objects
-            cars.append(Auto.new(i["mark"], i["model"], i["year"], i["consumption"]))
-        end
+  def load_from_file(file_name)
+    require 'json'
+    json_data = File.read(file_name)
+    ruby_objects = JSON.parse(json_data)
+    ruby_objects.each do |i|
+      cars.append(Auto.new(i['mark'], i['model'], i['year'], i['consumption']))
     end
+  end
 
-    def average_cons
-        average = 0
-        for i in cars
-            average += i.gas_cons
-        end
-        if cars.count == 0
-            return 0
-        end
-        average /= cars.count
+  def average_cons
+    average = 0
+    cars.each do |i|
+      average += i.gas_cons
     end
+    return 0 if cars.count.zero?
 
-    def number_by_brand(brand)
-        count = 0
-        for i in cars
-            if i.brand.eql?(brand)
-                count +=1
-            end
-        end
-        return count
-    end
+    average /= cars.count
+  end
 
-    def number_by_model(model)
-        count = 0
-        for i in cars
-            if i.model == model
-                count +=1
-            end
-        end
-        return count
+  def number_by_brand(brand)
+    count = 0
+    cars.each do |i|
+      count += 1 if i.brand.eql?(brand)
     end
+    count
+  end
 
-    def consumption_by_brand(brand)
-        count = 0
-        average = 0
-        for i in cars
-            if i.brand == brand
-                average += i.gas_cons
-                count +=1
-            end
-        end
-        if count == 0
-            return 0
-        end
-        average /= count
+  def number_by_model(model)
+    count = 0
+    cars.each do |i|
+      count += 1 if i.model == model
     end
+    count
+  end
+
+  def consumption_by_brand(brand)
+    count = 0
+    average = 0
+    cars.each do |i|
+      if i.brand == brand
+        average += i.gas_cons
+        count += 1
+      end
+    end
+    return 0 if count.zero?
+
+    average /= count
+  end
 end

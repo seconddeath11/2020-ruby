@@ -2,6 +2,7 @@
 
 require_relative 'my_complex.rb'
 require 'tty-prompt'
+require 'chunky_png'
 
 def main
   prompt = tty
