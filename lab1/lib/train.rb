@@ -19,9 +19,9 @@ class Train
   end
 
   def show_stops
-      puts "Маршрут: #{@number} Остановки:"
-      @stops.each do |stop| 
-        puts stop.to_s 
-      end
+    puts "Маршрут: #{@number} Остановки:"
+    @stops.each do |stop|
+      puts stop.to_s
+    end
   end
 end

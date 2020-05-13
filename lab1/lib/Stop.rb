@@ -9,7 +9,6 @@ class Stop
     @distance = distance
   end
 
-
   def to_s
     "#{@number} #{@stop} #{@arrival}"
   end

@@ -31,7 +31,7 @@ def solve_with_cycle(array)
   znak = array[0]
   pos = []
   i = 0
-  for number in array 
+  array.each do |number|
     if (znak * number).negative?
       pos.append(i)
       znak = number
