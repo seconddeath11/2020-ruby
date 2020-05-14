@@ -5,15 +5,19 @@ require 'roda'
 # ddddd
 class App < Roda
   opts[:root] = __dir__
-  plugin :public
+  plugin :environments
+  plugin :render
+
+  configure :development do
+    plugin :public
+    opts[:serve_static] = true
+  end
 
   route do |r|
+    r.public if opts[:serve_static]
     r.root do
-      view(layout)
+      view('index')
     end
 
-    r.on 'hello' do
-      @greeting = 'Hello with rerun???'
-    end
   end
 end
