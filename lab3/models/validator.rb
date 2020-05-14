@@ -2,29 +2,30 @@
 
 # Validators for the incoming requests
 module Validator
-  def self.check(name, date, book)
-    errors = [].concat(check_date_format(date)).concat(check_name(name))
+  def self.check(r_name, r_date, r_book)
+    name_ = r_name || ''
+    date = r_date || ''
+    book = r_book || ''
+    errors = [].concat(check_date_format(date)).concat(check_name(name_))
                .concat(check_date(date)).concat(check_date_day(date))
                .concat(check_date_month(date)).concat(check_book(book))
     {
-      name: name,
-      date: date,
-      book: book,
+      name: name_, date: date, book: book,
       errors: errors
     }
   end
 
   def self.check_date_format(date)
-    if /\d{4}-\d{2}-\d{2}/ =~ date
+    if date.strip.match(/\d{4}-\d{2}-\d{2}$/)
       []
     else
-      ['Дата должна быть передана в формате ГГГГ-ММ-ДД']
+      ['Date should be in this format: yyyy-MM-dd']
     end
   end
 
   def self.check_name(name)
     if name.empty?
-      ['Имя автора не может быть пустым']
+      ['The name of the author is empty']
     else
       []
     end
@@ -32,7 +33,7 @@ module Validator
 
   def self.check_book(name)
     if name.empty?
-      ['Название не может быть пустым']
+      ['The title of the book is empty']
     else
       []
     end
@@ -40,7 +41,7 @@ module Validator
 
   def self.check_date(date)
     if date.empty?
-      ['Дата не может быть пустой']
+      ['Date is empty']
     else
       []
     end
@@ -48,19 +49,19 @@ module Validator
 
   def self.check_date_month(date)
     month = date.split('-')[1].to_i
-    if month < 12 && month.positive?
+    if month <= 12 && month.positive?
       []
     else
-      ['Такого месяца не существует']
+      ['No such month']
     end
   end
 
   def self.check_date_day(date)
     day = date.split('-')[2].to_i
-    if day < 31 && day.positive?
+    if day <= 31 && day.positive?
       []
     else
-      ['Такого дня не существует']
+      ['No such day']
     end
   end
 end

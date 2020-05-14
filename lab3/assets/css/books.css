@@ -1,6 +1,10 @@
 h5{
     text-align: center;
 }
-.errors ul{
+.alert ul{
     list-style: circle;
+}
+.body{
+    max-width: 80%;
+    margin: auto;
 }

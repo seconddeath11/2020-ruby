@@ -28,24 +28,29 @@ class App < Roda
       view('index')
     end
 
-    r.on 'new_book' do
-      view('new_book')
-      @params = Validator.check(r.params['name'],
-                                r.params['date'],
-                                r.params['book'])
-
+    r.on 'new' do
+      r.get do
+        view('new')
+      end
       r.post do
-        @params = InputValidators.check_test(r.params['name'],
-                                             r.params['date'],
-                                             r.params['book'])
+        
+        @params = Validator.check(r.params['name'],
+                                  r.params['date'],
+                                  r.params['book'])
         if @params[:errors].empty?
-          opts[:books].add_book(Test.new(@params[:name],
+          opts[:books].add_book(Book.new(@params[:name],
                                          @params[:date],
                                          @params[:book]))
           r.redirect '/'
         else
-          view('new_book')
+          view('new')
         end
+      end
+    end
+
+    r.on 'statistics' do
+      r.get do
+        view('statistics')
       end
     end
   end
