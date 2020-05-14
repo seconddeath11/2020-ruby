@@ -7,4 +7,5 @@ class Book
     @date = Date.parse(date)
     @book = book
   end
+  attr_accessor :date, :name, :book
 end

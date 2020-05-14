@@ -5,7 +5,7 @@ require 'forwardable'
 # list of books
 class BookList
   extend Forwardable
-  def_delegator :@books
+  def_delegator :@books, :each
 
   def initialize(books = [])
     @books = books
@@ -17,5 +17,9 @@ class BookList
 
   def all_books
     @books.dup
+  end
+
+  def sort
+    @books.sort_by(&:date).reverse
   end
 end

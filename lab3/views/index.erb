@@ -1,0 +1,20 @@
+<div>
+<br>
+<h5> All of your books </h5><br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Author and book</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @sorted_list.each do |book|%>
+    <tr>
+      <td><%=book.date %></td>
+      <td><%=book.name + '  "' + book.book + '"' %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+</div>
