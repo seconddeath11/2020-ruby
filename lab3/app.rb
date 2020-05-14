@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'roda'
+require_relative 'models'
 
 # ddddd
 class App < Roda

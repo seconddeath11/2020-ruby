@@ -1,3 +1,10 @@
 # frozen_string_literal: true
 
-Book = Struct.new(:name, :date, :book)
+# book
+class Book
+  def initialize(name, date, book)
+    @name = name
+    @date = Date.parse(date)
+    @book = book
+  end
+end
