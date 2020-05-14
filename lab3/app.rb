@@ -27,19 +27,26 @@ class App < Roda
       @sorted_list = opts[:books].sort
       view('index')
     end
+
     r.on 'new_book' do
+      view('new_book')
       @params = Validator.check(r.params['name'],
                                 r.params['date'],
                                 r.params['book'])
-      @sorted_tests = if @params[:errors].empty?
-                        opts[:books].sort(@params[:name],
-                                          @params[:date],
-                                          @params[:book])
-                      else
-                        opts[:books].all_books
-                      end
 
-      view('index')
+      r.post do
+        @params = InputValidators.check_test(r.params['name'],
+                                             r.params['date'],
+                                             r.params['book'])
+        if @params[:errors].empty?
+          opts[:books].add_book(Test.new(@params[:name],
+                                         @params[:date],
+                                         @params[:book]))
+          r.redirect '/'
+        else
+          view('new_book')
+        end
+      end
     end
   end
 end
