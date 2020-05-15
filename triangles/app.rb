@@ -18,6 +18,5 @@ class App < Roda
     r.root do
       view('index')
     end
-
   end
 end

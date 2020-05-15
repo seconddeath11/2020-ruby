@@ -1,10 +1,26 @@
-<form class='years'>
+<form class='years' >
 <% @years.each do |year|%>
-<input type="submit" class="btn btn-info" name="year" value="<%= year %>">
+<button type="submit" class="btn btn-info" name="year" value="<%=  year %>"> <%=year%></button>
 <%end%>
 </form>
-<% if !@year.empty?%>
+<% if @list_by_year.count(0) != @list_by_year.length %>
 <div>
-<%=@year%>:
+<table class="table table-striped months">
+  <thead>
+    <tr>
+      <th scope="col">Month</th>
+      <th scope="col">Number of books</th>
+    </tr>
+  </thead>
+  <tbody>
+  <%p @list_by_year%>
+  <% @list_by_year.each_with_index { |month, index|%>
+    <tr>
+      <td><%= @months[index+1]%></td>
+      <td><%= month %></td>
+    </tr>
+    <%}%>
+  </tbody>
+</table>
 </div>
 <%end%>

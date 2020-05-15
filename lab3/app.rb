@@ -2,6 +2,7 @@
 
 require 'roda'
 require_relative 'models'
+require 'date'
 
 # ddddd
 class App < Roda
@@ -29,9 +30,11 @@ class App < Roda
     end
     r.on 'statistics' do
       r.is do
-        @year = r.params['year'] || ''
         @years = opts[:books].filter_years
-        view('statistics') 
+        @year = r.params['year']
+        @list_by_year = opts[:books].by_year(@year)
+        @months = Date::ABBR_MONTHNAMES
+        view('statistics')
       end
     end
     r.on 'new' do

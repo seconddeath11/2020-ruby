@@ -13,3 +13,6 @@ h5{
     display: flex;
     justify-content: space-evenly;
 }
+.months{
+    margin-top: 20px;
+}

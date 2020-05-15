@@ -5,7 +5,7 @@ require 'forwardable'
 # list of books
 class BookList
   extend Forwardable
-  def_delegator :@books, :each
+  def_delegator :@books, :each, :each_with_index
 
   def initialize(books = [])
     @books = books
@@ -32,9 +32,10 @@ class BookList
   end
 
   def by_year(year)
-    list = BookList.new
+    list = Array.new(12, 0)
     @books.each do |book|
-      list.add_book(book) if book.date.year == year
+      list[book.date.month - 1] += 1 if book.date.year == year.to_i
     end
+    list
   end
 end
