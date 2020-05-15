@@ -8,3 +8,8 @@ h5{
     max-width: 80%;
     margin: auto;
 }
+.years{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+}

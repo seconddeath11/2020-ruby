@@ -22,4 +22,19 @@ class BookList
   def sort
     @books.sort_by(&:date).reverse
   end
+
+  def filter_years
+    years = []
+    @books.each do |book|
+      years.append(book.date.year) unless years.include?(book.date.year)
+    end
+    years
+  end
+
+  def by_year(year)
+    list = BookList.new
+    @books.each do |book|
+      list.add_book(book) if book.date.year == year
+    end
+  end
 end

@@ -27,13 +27,17 @@ class App < Roda
       @sorted_list = opts[:books].sort
       view('index')
     end
-
+    r.is 'statistics' do
+      r.get do
+        @years = opts[:books].filter_years
+        view('statistics')
+      end
+    end
     r.on 'new' do
       r.get do
         view('new')
       end
       r.post do
-        
         @params = Validator.check(r.params['name'],
                                   r.params['date'],
                                   r.params['book'])
@@ -46,12 +50,6 @@ class App < Roda
           view('new')
         end
       end
-    end
-
-    r.on 'statistics' do
-      r.get do
-        view('statistics')
-      end
-    end
+    end   
   end
 end
