@@ -27,10 +27,11 @@ class App < Roda
       @sorted_list = opts[:books].sort
       view('index')
     end
-    r.is 'statistics' do
-      r.get do
+    r.on 'statistics' do
+      r.is do
+        @year = r.params['year'] || ''
         @years = opts[:books].filter_years
-        view('statistics')
+        view('statistics') 
       end
     end
     r.on 'new' do
@@ -50,6 +51,6 @@ class App < Roda
           view('new')
         end
       end
-    end   
+    end
   end
 end

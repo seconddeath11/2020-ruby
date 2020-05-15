@@ -1,11 +1,10 @@
 <form class='years'>
-<%year = ""%>
 <% @years.each do |year|%>
-<button type="button" type="submit" class="btn btn-info" name="year" value="<%= year %>"><%=year %></button>
+<input type="submit" class="btn btn-info" name="year" value="<%= year %>">
 <%end%>
 </form>
-<% if !year.empty?%>
+<% if !@year.empty?%>
 <div>
-hi
+<%=@year%>:
 </div>
 <%end%>
