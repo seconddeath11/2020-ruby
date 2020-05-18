@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# book
+# book - an element in a booklist
 class Book
   def initialize(name, date, book)
     @name = name

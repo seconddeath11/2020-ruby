@@ -4,7 +4,7 @@ require 'roda'
 require_relative 'models'
 require 'date'
 
-# ddddd
+# The core of the app
 class App < Roda
   opts[:root] = __dir__
   plugin :environments

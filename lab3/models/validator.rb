@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Validators for the incoming requests
+# Validator for the incoming requests
 module Validator
   def self.check(r_name, r_date, r_book)
     name_ = r_name || ''
