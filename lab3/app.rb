@@ -26,15 +26,15 @@ class App < Roda
     r.assets
     r.root do
       #r.is do
-      @sorted_list = opts[:books].sort
-      if (@params && @params[:format] && !@params[:format].empty?)
-        @sorted_list = opts[:books].by_format(r.params['format'])
-      end
-      view('index')
       #end
-     # r.get do
-       # 
-      #end
+      #r.is do
+        @sorted_list = opts[:books].sort  
+        if (@params && @params[:format] && !@params[:format].empty?)
+          @sorted_list = opts[:books].by_format(@params[:format])
+        end
+        view('index')
+       
+    #end
     end
     r.on 'statistics' do
       r.is do
