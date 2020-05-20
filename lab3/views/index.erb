@@ -2,11 +2,13 @@
 <br>
 <form method="get">
 <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Recipient's username" name="format" aria-label="Recipient's username" 
-  aria-describedby="button-addon2">
-  <div class="input-group-append">
-    <input class="btn btn-primary" type="submit" value="Filter by format">
-  </div>
+  <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+    <option selected>Choose...</option>
+    <option name="format" value="<%= @params && @params[:format] %>">audio</option>
+    <option name="format" value="<%= @params && @params[:format] %>">electronic</option>
+    <option name="format" value="<%= @params && @params[:format] %>">printed</option>
+  </select>
+  <input class="btn btn-primary" type="submit" value="Filter">
 </div>
 </form>
 <h5> All of your books </h5><br>

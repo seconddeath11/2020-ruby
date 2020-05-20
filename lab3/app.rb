@@ -17,9 +17,9 @@ class App < Roda
   end
 
   opts[:books] = BookList.new(
-    [Book.new('Charles Dickens', '2012-02-20', 'Great Expectations' , 5, 'Electronic'),
-     Book.new('Jack London', '2011-05-17', 'The people of abyss',5,  'Printed'),
-     Book.new('Leo Tolstoy', '2025-12-19', 'The war and piece', 8, 'audio')]
+    [Book.new('Charles Dickens', '2012-02-20', 'Great Expectations' , 5, 'electronic', ''),
+     Book.new('Jack London', '2011-05-17', 'The people of abyss',5,  'printed', ''),
+     Book.new('Leo Tolstoy', '2025-12-19', 'The war and piece', 8, 'audio', '')]
   )
   route do |r|
     r.public if opts[:serve_static]
@@ -27,8 +27,8 @@ class App < Roda
     r.root do
       #r.is do
       @sorted_list = opts[:books].sort
-      if (!r.params['format'].empty?)
-      #@sorted_list = opts[:books].by_format(r.params['format'])
+      if (@params && @params[:format] && !@params[:format].empty?)
+        @sorted_list = opts[:books].by_format(r.params['format'])
       end
       view('index')
       #end
@@ -52,11 +52,19 @@ class App < Roda
       r.post do
         @params = Validator.check(r.params['name'],
                                   r.params['date'],
-                                  r.params['book'])
+                                  r.params['book'],
+                                r.params['mark'],
+                              r.params['size'],
+                              r.params['format'],
+                              r.params['comment']
+                          )
         if @params[:errors].empty?
           opts[:books].add_book(Book.new(@params[:name],
                                          @params[:date],
-                                         @params[:book]))
+                                         @params[:book],
+                                        @params[:mark],
+                                        @params[:format],
+                                        @params[:comment]))
           r.redirect '/'
         else
           view('new')
