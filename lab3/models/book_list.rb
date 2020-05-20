@@ -40,7 +40,7 @@ class BookList
   end
 
   def by_format(format)
-    @books.each do |book|
+    @books.select do |book|
       next if (format <=> book.format) != 0
 
       true
