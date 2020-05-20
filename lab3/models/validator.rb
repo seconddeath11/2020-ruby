@@ -2,15 +2,16 @@
 
 # Validator for the incoming requests
 module Validator
-  def self.check(r_name, r_date, r_book)
+  def self.check(r_name, r_date, r_book, mark, format, size)
     name_ = r_name || ''
     date = r_date || ''
     book = r_book || ''
     errors = [].concat(check_date_format(date)).concat(check_name(name_))
                .concat(check_date(date)).concat(check_date_day(date))
                .concat(check_date_month(date)).concat(check_book(book))
+               .concat(check_format(format)).concat(check_size(format, size))
     {
-      name: name_, date: date, book: book,
+      name: name_, date: date, book: book, mark: mark, format: format,
       errors: errors
     }
   end
@@ -62,6 +63,23 @@ module Validator
       []
     else
       ['No such day']
+    end
+  end
+
+  def self.check_format(format)
+    if format.empty?
+      ['The format is empty']
+    else
+      []
+    end
+  end
+  def self.check_size(format, size)
+    if (((format <==> 'audio' == 0) && ((!size.split('-')[1].to_i < 60) || (!size.split('-')[2].to_i < 60)))
+      || ((format <==> 'electronic') && (size.to_i == 0))
+      || ((format <==> 'printed') && (size.to_i == 0)))
+      ['The format is wrong']
+    else
+      []
     end
   end
 end

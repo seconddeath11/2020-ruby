@@ -17,16 +17,24 @@ class App < Roda
   end
 
   opts[:books] = BookList.new(
-    [Book.new('Charles Dickens', '2012-02-20', 'Great Expectations'),
-     Book.new('Jack London', '2011-05-17', 'The people of abyss'),
-     Book.new('Leo Tolstoy', '2025-12-19', 'The war and piece')]
+    [Book.new('Charles Dickens', '2012-02-20', 'Great Expectations' , 5, 'Electronic'),
+     Book.new('Jack London', '2011-05-17', 'The people of abyss',5,  'Printed'),
+     Book.new('Leo Tolstoy', '2025-12-19', 'The war and piece', 8, 'audio')]
   )
   route do |r|
     r.public if opts[:serve_static]
     r.assets
     r.root do
+      #r.is do
       @sorted_list = opts[:books].sort
+      if (!r.params['format'].empty?)
+      #@sorted_list = opts[:books].by_format(r.params['format'])
+      end
       view('index')
+      #end
+     # r.get do
+       # 
+      #end
     end
     r.on 'statistics' do
       r.is do

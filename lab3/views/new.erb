@@ -23,5 +23,25 @@
     <label for="inputDate">Date</label>
     <input type="text" class="form-control" name="date" placeholder="2017-01-01" value="<%= @params && @params[:date] %>">
   </div>
+  <div class="input-group mb-3">
+  <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+    <option selected>Choose...</option>
+    <option value="audio">Audio</option>
+    <option value="electronic">electronic</option>
+    <option value="printed">printed</option>
+  </select>
+</div>
+<div class="form-group">
+    <label for="inputSize">Size</label>
+    <input type="text" class="form-control" name="size" value="<%= @params && @params[:size] %>">
+  </div>
+  <div class="form-group">
+    <label for="inputMark">Mark</label>
+    <input type="text" class="form-control" name="mark" value="<%= @params && @params[:mark] %>">
+  </div>
+  <div class="form-group">
+    <label for="inputComment">Comment</label>
+    <input type="text" class="form-control" name="comment" value="<%= @params && @params[:comment] %>">
+  </div>
   <input class="btn btn-primary" type="submit" value="Save">
 </form>
