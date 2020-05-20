@@ -75,22 +75,25 @@ module Validator
       []
     end
   end
+
   def self.check_size(format, size)
-    if ((format == 'audio') && ((!size.split('-')[1].to_i < 60) || (!size.split('-')[2].to_i < 60)))
+    if (format == 'audio') && ((!size.split('-')[1].to_i < 60) || (!size.split('-')[2].to_i < 60))
       ['The format is wrong']
-    #elsif (format != 'audio') && (size.to_i == 0)
-     # ['The format is wrong']
+    # elsif (format != 'audio') && (size.to_i == 0)
+    # ['The format is wrong']
     else
       []
     end
   end
+
   def self.check_mark(mark)
-    if (mark > 10) || (mark < 0)
+    if (mark > 10) || mark.negative?
       ['The mark is wrong']
     else
       []
     end
   end
+
   def self.check_comment(comment)
     if comment.length > 2000
       ['The comment is too big']
