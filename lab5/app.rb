@@ -14,7 +14,6 @@ class App < Roda
     opts[:serve_static] = true
   end
 
-  
   route do |r|
     r.public if opts[:serve_static]
     r.root do

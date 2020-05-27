@@ -27,6 +27,6 @@ class BusList
   end
 
   def find_driver(name)
-    @buses.get(@buses.index {|bus| bus.name.split(' ')[0] == name}).number
+    @buses.get(@buses.index { |bus| bus.name.split(' ')[0] == name }).number
   end
 end
