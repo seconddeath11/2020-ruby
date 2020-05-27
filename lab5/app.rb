@@ -2,14 +2,12 @@
 
 require 'roda'
 require_relative 'models'
-require 'date'
 
 # The core of the app
 class App < Roda
   opts[:root] = __dir__
   plugin :environments
   plugin :render
-  plugin :assets, css: 'books.css'
 
   configure :development do
     plugin :public
@@ -23,7 +21,6 @@ class App < Roda
   )
   route do |r|
     r.public if opts[:serve_static]
-    r.assets
     r.root do
       @sorted_list = opts[:books].sort
       @filter = r.params['format']
