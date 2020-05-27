@@ -75,7 +75,7 @@ PLATFORMS
 DEPENDENCIES
   dry-schema
   forme
-  puma
+  puma (>= 4.3.5)
   rerun
   roda
   rubocop
