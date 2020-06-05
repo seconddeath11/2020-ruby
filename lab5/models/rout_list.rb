@@ -3,18 +3,24 @@
 # List of all routes
 class RoutList
   def initialize(routes = [])
-    @routes = routes
+    @routes = routes.map do |rout|
+      [rout.name, rout]
+    end.to_h
   end
 
   def add(rout)
-    @routs.append(rout)
+    @routes[rout.name] = rout
   end
 
-  def get_by_number(number)
-    @routes.index { |x| x.name == number }
+  def all
+    @routes.values
+  end
+
+  def ids
+    @routes.keys
   end
 
   def remove(number)
-    @routes.remove(get_by_number(number))
+    @routes.delete(number)
   end
 end

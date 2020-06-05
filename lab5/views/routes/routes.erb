@@ -1,0 +1,28 @@
+<div class="container">
+<br>
+<h5> All routes </h5><br>
+<a href="<%= new_rout_path %>" class="btn btn-light">
+      Add
+    </a>
+    <br><br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Number</th>
+      <th scope="col">Stops</th>
+      <th scope="col">Length</th>
+      <th scope="col">Buses needed</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @routes.each do |rout|%>
+    <tr>
+      <td><%=rout.name %></td>
+      <td><%=rout.stops%></td>
+      <td><%=rout.length %></td>
+      <td><%=rout.buses %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+</div>

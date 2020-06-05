@@ -1,0 +1,33 @@
+<div class ="container">
+<br>
+<h5> All buses </h5><br>
+<a href="<%= new_bus_path %>" class="btn btn-light">
+      Add
+    </a>
+    <br><br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Number</th>
+      <th scope="col">Consumption</th>
+      <th scope="col">Driver</th>
+      <th scope="col">Rout</th>
+      <th scope="col">State</th>
+      <th scope="col">Functions</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @buses.each do |bus|%>
+    <tr>
+      <td><%=bus.number %></td>
+      <td><%=bus.consumption%></td>
+      <td><%=bus.name %></td>
+      <td><%=bus.rout %></td>
+      <td><%=bus.state %></td>
+      <td><a class="button" href="<%= path(bus, 'edit') %>">Edit  |</a>
+      <a class="button" href="<%= path(bus, 'delete') %>">  Delete</a></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+</div>

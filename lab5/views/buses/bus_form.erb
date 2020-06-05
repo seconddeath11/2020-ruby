@@ -1,0 +1,22 @@
+<% form({ method: :post },{ obj: @parameters }) do |f| %>
+    <div class="form-group">
+      <%= f.input(:number, type: :text, label: 'Number', placeholder: '23', disabled: disabled)%>
+    </div>
+    <div class="form-group">
+      <%= f.input( :consumption, type: :text, label: 'Consumption', placeholder: '25', disabled: disabled)%>
+    </div>
+    <div class="form-group">
+      <%= f.input( :name, type: :text, label: 'Name of the driver', placeholder: 'Dickens Jane', disabled: disabled)%>
+    </div>
+    <div class="form-group">
+      <%= f.input( :rout, type: :select,  label: 'Rout number', options: @ids) %>
+    </div>
+    
+    <div >
+      <%= f.input( :state, type: :select, label: 'State of the bus', options: StateType.all)%>
+    </div>
+    <div class="form-group">
+      <%= f.button(value: form_type, class: "btn btn-light") %>
+      <a href="<%= back_location %>" class="btn btn-light">Cancel</a>
+    </div>
+<% end %>

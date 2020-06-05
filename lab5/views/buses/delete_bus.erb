@@ -1,0 +1,13 @@
+<div class="container">
+<p> Are you sure you want to delete this bus? </p>
+
+<%form({ method: :post },{ obj: @parameters }) do |f| %>
+<div class='container'>
+<%= f.input(:confirmation, type: :checkbox, label: 'Yes' )%>
+</div>
+<div class='container'>
+<%= f.button(value: 'Delete', class: "btn btn-danger")%>
+<a href="/buses" class="btn btn-ligth">Cancel</a>
+</div>
+<%end%>
+</div>

@@ -1,0 +1,26 @@
+---
+:buses:
+- :number: 33
+  :consumption: 20
+  :name: Black Dave
+  :rout: 10
+  :state: Working
+- :number: 32
+  :consumption: 21
+  :name: Smit David
+  :rout: 4
+  :state: Paused
+- :number: 3
+  :consumption: 3
+  :name: Grey Ann
+  :rout: 4
+  :state: Working
+:routes:
+- :name: 10
+  :stops: 12
+  :length: 25
+  :buses: 5
+- :name: 4
+  :stops: 7
+  :length: 6
+  :buses: 4

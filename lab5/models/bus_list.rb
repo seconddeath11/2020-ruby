@@ -3,19 +3,21 @@
 # List of all buses
 class BusList
   def initialize(buses = [])
-    @buses = buses
+    @buses = buses.map do |bus|
+      [bus.number, bus]
+    end.to_h
   end
 
   def add(bus)
-    @buses.append(bus)
+    @buses[bus.number] = bus
   end
 
-  def get_by_number(number)
-    @buses.index { |x| x.number == number }
+  def all
+    @buses.values
   end
 
-  def remove(number)
-    @buses.remove(get_by_number(number))
+  def delete(number)
+    @buses.delete(number)
   end
 
   def by_state(state)
@@ -23,6 +25,17 @@ class BusList
       next if bus.state != state
 
       true
+    end
+  end
+
+  def find_by_id(id)
+    @buses[id]
+  end
+
+  def update(id, bus)
+    old_bus = @buses[id]
+    bus.to_h.each do |key, value|
+      old_bus[key] = value
     end
   end
 
