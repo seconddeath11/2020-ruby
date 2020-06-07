@@ -5,7 +5,11 @@ class App
   path :buses, '/buses'
   path :new_bus, '/buses/new'
   path Bus do |bus, action|
-    "buses/#{bus.number}/#{action}"
+    if action
+      "buses/#{bus.number}/#{action}"
+    else
+      "buses/#{bus.number}"
+    end
   end
 
   hash_branch('buses') do |r|
@@ -19,12 +23,14 @@ class App
     r.on 'new' do
       r.get do
         @ids = opts[:routes].ids.sort
+        @numbers = opts[:buses].numbers
         @read = false
         @parameters = {}
         view('new_bus')
       end
 
       r.post do
+        @ids = opts[:routes].ids.sort
         @parameters = FormeWrapper.new(BusSchema.call(r.params))
         if @parameters.success?
           opts[:buses].add(Bus.new(**@parameters.to_h))
@@ -35,6 +41,7 @@ class App
       end
     end
     r.on Integer do |id|
+      @read = true
       @bus = opts[:buses].find_by_id(id)
       next if @bus.nil?
 
@@ -47,6 +54,7 @@ class App
         end
 
         r.post do
+          @ids = opts[:routes].ids.sort
           @parameters = FormeWrapper.new(BusSchema.call(r.params))
           if @parameters.success?
             opts[:books].update(@bus.number, @parameters)

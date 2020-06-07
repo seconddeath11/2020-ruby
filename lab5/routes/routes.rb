@@ -35,23 +35,28 @@ class App
 
     r.on Integer do |id|
       @rout = opts[:routes].find_by_id(id)
-      next if @bus.nil?
+      next if @rout.nil?
 
-      r.on 'edit' do
+      r.on 'delete' do
         r.get do
-          @parameters = @bus.to_h
-          view('edit_bus')
+          @parameters = {}
+          view('delete_rout')
         end
 
         r.post do
-          @parameters = DryResultFormeWrapper.new(BookFormSchema.call(r.params))
+          @parameters = FormeWrapper.new(RoutDeleteSchema.call(r.params))
           if @parameters.success?
-            opts[:books].update(@bus.number, @parameters)
+            opts[:routes].delete(@bus.number)
             r.redirect('/')
           else
-            view('edit_bus')
+            view('delete_rout')
           end
         end
+      end
+
+      r.on 'check' do
+        opts[:buses].check(@rout.name, @rout.buses)
+        view('check_rout')
       end
     end
   end

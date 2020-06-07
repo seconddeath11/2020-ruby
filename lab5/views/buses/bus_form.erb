@@ -1,12 +1,12 @@
 <% form({ method: :post },{ obj: @parameters }) do |f| %>
     <div class="form-group">
-      <%= f.input(:number, type: :text, label: 'Number', placeholder: '23', disabled: disabled)%>
+      <%= f.input(:number, type: :text, label: 'Number', placeholder: '23', disabled: @read)%>
     </div>
     <div class="form-group">
-      <%= f.input( :consumption, type: :text, label: 'Consumption', placeholder: '25', disabled: disabled)%>
+      <%= f.input( :consumption, type: :text, label: 'Consumption', placeholder: '25', disabled: @read)%>
     </div>
     <div class="form-group">
-      <%= f.input( :name, type: :text, label: 'Name of the driver', placeholder: 'Dickens Jane', disabled: disabled)%>
+      <%= f.input( :name, type: :text, label: 'Name of the driver', placeholder: 'Dickens Jane', disabled: @read)%>
     </div>
     <div class="form-group">
       <%= f.input( :rout, type: :select,  label: 'Rout number', options: @ids) %>

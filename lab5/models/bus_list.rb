@@ -16,6 +16,10 @@ class BusList
     @buses.values
   end
 
+  def numbers
+    @buses.keys
+  end
+
   def delete(number)
     @buses.delete(number)
   end

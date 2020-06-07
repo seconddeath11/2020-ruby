@@ -20,6 +20,10 @@ class RoutList
     @routes.keys
   end
 
+  def find_by_id(id)
+    @routes[id]
+  end
+
   def remove(number)
     @routes.delete(number)
   end
