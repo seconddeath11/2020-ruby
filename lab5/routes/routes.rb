@@ -37,9 +37,7 @@ class App
     r.on 'find' do
       r.get do
         @parameters = FormeWrapper.new(DriverSchema.call(r.params))
-        if @parameters.success?
-          @number = opts[:buses].find_driver(@parameters[:driver])
-        end
+        @number = opts[:buses].find_driver(@parameters[:driver]) if @parameters.success?
         view('find_driver')
       end
     end

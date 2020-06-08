@@ -45,9 +45,7 @@ class BusList
 
   def find_driver(name)
     @buses.each do |_index, bus|
-      if bus.name.split()[0] == name
-        return bus.number
-      end
+      return bus.number if bus.name.split[0] == name
     end
   end
 
