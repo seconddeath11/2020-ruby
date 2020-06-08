@@ -3,6 +3,7 @@
 # the core
 class App
   path :routes, '/routes'
+  path :find, '/routes/find'
   path :new_rout, '/routes/new'
   path Rout do |rout, action|
     "routes/#{rout.name}/#{action}"
@@ -33,6 +34,16 @@ class App
       end
     end
 
+    r.on 'find' do
+      r.get do
+        @parameters = FormeWrapper.new(DriverSchema.call(r.params))
+        if @parameters.success?
+          @number = opts[:buses].find_driver(@parameters[:driver])
+        end
+        view('find_driver')
+      end
+    end
+
     r.on Integer do |id|
       @rout = opts[:routes].find_by_id(id)
       next if @rout.nil?
@@ -55,7 +66,7 @@ class App
       end
 
       r.on 'check' do
-        opts[:buses].check(@rout.name, @rout.buses)
+        @check = opts[:buses].check(@rout.name, @rout.buses)
         view('check_rout')
       end
     end

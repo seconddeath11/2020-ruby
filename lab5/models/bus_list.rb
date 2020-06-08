@@ -44,6 +44,23 @@ class BusList
   end
 
   def find_driver(name)
-    @buses.get(@buses.index { |bus| bus.name.split(' ')[0] == name }).number
+    @buses.each do |_index, bus|
+      if bus.name.split()[0] == name
+        return bus.number
+      end
+    end
+  end
+
+  def check(number, buses)
+    @buses.each do |_index, bus|
+      buses -= 1 if bus.rout == number
+    end
+    if buses.positive?
+      'Not enough buses'
+    elsif buses.zero?
+      'Enough buses'
+    else
+      'Too much buses'
+    end
   end
 end

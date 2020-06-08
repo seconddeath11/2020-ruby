@@ -1,0 +1,11 @@
+<div class="container">
+<% form({ method: :get },{ obj: @parameters }) do |f| %>
+    <div class="form-group">
+      <%= f.input(:driver, type: :text, placeholder: 'Grey')%>
+    </div>
+    <div class="form-group">
+      <%= f.button(value: 'Find', class: "btn btn-light") %>
+      <a href="<%= routes_path %>" class="btn btn-light">Cancel</a>
+    </div>
+<% end %>
+<%= @number%>
