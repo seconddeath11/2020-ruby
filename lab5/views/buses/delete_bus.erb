@@ -1,14 +1,14 @@
 <div class='container'>
-<p> Are you sure you want to delete this bus? </p>
+<p> Вы уверены, что хотите удалить автобус № <%=@bus.number%>? </p>
 </div>
 <%form({ method: :post },{ obj: @parameters }) do |f| %>
 <div class='container'>
-<div class="container d-flex flex-column">
-<%= f.input(:confirmation, type: :checkbox, label: 'Yes' )%>
+<div class='container d-flex flex-column'>
+<%= f.input(:confirmation, type: :checkbox, label: 'Да' )%>
 </div>
 <div class='container'>
-<%= f.button(value: 'Delete', class: "btn btn-danger")%>
-<a href="<%= buses_path %>" class="btn btn-ligth">Cancel</a>
+<%= f.button(value: 'Удалить', class: 'btn btn-danger')%>
+<a href="<%= buses_path %>" class='btn btn-ligth'>Отмена</a>
 </div>
 </div>
 <%end%>

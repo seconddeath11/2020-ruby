@@ -6,7 +6,7 @@ require_relative 'bus'
 require_relative 'rout_list'
 require_relative 'rout'
 
-# Storage for all of our data
+# Storage for all data
 class Store
   attr_reader :bus_list, :rout_list
 

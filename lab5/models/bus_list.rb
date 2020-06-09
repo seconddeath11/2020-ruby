@@ -51,14 +51,14 @@ class BusList
 
   def check(number, buses)
     @buses.each do |_index, bus|
-      buses -= 1 if bus.rout == number
+      buses -= 1 if bus.rout == number && bus.state == 'Работает'
     end
     if buses.positive?
-      'Not enough buses'
+      'Дефицит автобусов'
     elsif buses.zero?
-      'Enough buses'
+      'Столько, сколько нужно'
     else
-      'Too much buses'
+      'Избыток автобусов'
     end
   end
 end

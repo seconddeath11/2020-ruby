@@ -3,5 +3,5 @@
 require 'dry-schema'
 
 BusDeleteSchema = Dry::Schema.Params do
-  required(:confirmation).value(true)
+  required(:confirmation).filled(true)
 end

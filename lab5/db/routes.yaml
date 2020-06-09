@@ -2,19 +2,19 @@
 :buses:
 - :number: 33
   :consumption: 20
-  :name: Black Dave
+  :name: Петрова Анна
   :rout: 10
-  :state: Working
+  :state: Работает
 - :number: 32
   :consumption: 21
-  :name: Smit David
+  :name: Иванов Денис
   :rout: 4
-  :state: Paused
+  :state: Простаивает
 - :number: 3
   :consumption: 3
-  :name: Grey Ann
+  :name: Волкова Ирина
   :rout: 4
-  :state: Working
+  :state: Работает
 :routes:
 - :name: 10
   :stops: 12

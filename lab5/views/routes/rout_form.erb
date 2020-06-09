@@ -1,21 +1,21 @@
 <% form({ method: :post },{ obj: @parameters }) do |f| %>
   <div class="container">
     <div class="form-group">
-      <%= f.input(:name, type: :text, label: 'Number', placeholder: '23')%>
+      <%= f.input(:name, type: :text, label: 'Номер маршрута', placeholder: '23')%>
     </div>
     <div class="form-group">
-      <%= f.input( :stops, type: :text, label: 'Number of stops', placeholder: '15')%>
+      <%= f.input( :stops, type: :text, label: 'Количество остановок', placeholder: '15')%>
     </div>
     <div class="form-group">
-      <%= f.input( :length, type: :text, label: 'Length of the rout', placeholder: '24')%>
+      <%= f.input( :length, type: :text, label: 'Длина маршрута', placeholder: '24')%>
     </div>
     <div class="form-group">
-      <%= f.input( :buses, type: :text, label: 'Buses needed') %>
+      <%= f.input( :buses, type: :text, label: 'Автобусов необходимо') %>
     </div>
     
     <div class="form-group">
       <%= f.button(value: form_type, class: "btn btn-light") %>
-      <a href="<%= back_location %>" class="btn btn-light">Cancel</a>
+      <a href="<%= back_location %>" class="btn btn-light">Отмена</a>
     </div>
   </div>
 <% end %>

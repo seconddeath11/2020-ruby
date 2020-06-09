@@ -1,19 +1,19 @@
 <div class ="container">
 <br>
-<h5> All buses </h5><br>
+<h5> Все автобусы </h5><br>
 <a href="<%= new_bus_path %>" class="btn btn-light">
-      Add
+      Добавить
     </a>
     <br><br>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Number</th>
-      <th scope="col">Consumption</th>
-      <th scope="col">Driver</th>
-      <th scope="col">Rout</th>
-      <th scope="col">State</th>
-      <th scope="col">Functions</th>
+      <th scope="col">Номер автобуса</th>
+      <th scope="col">Расход бензина</th>
+      <th scope="col">ФИ водителя</th>
+      <th scope="col">Номер маршрута</th>
+      <th scope="col">Состояние</th>
+      <th scope="col">Функции</th>
     </tr>
   </thead>
   <tbody>
@@ -24,8 +24,8 @@
       <td><%=bus.name %></td>
       <td><%=bus.rout %></td>
       <td><%=bus.state %></td>
-      <td><a class="btn" href="<%= path(bus, 'edit') %>">Edit  |</a>
-      <a class="button" href="<%= path(bus, 'delete') %>">  Delete</a></td>
+      <td><a class="button" href="<%= path(bus, 'edit') %>">Изменить </a> |
+      <a class="button" href="<%= path(bus, 'delete') %>">  Удалить</a></td>
     </tr>
     <%end%>
   </tbody>

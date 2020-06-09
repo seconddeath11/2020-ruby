@@ -4,7 +4,7 @@
 module StateType
   def self.all
     [
-      'Working', 'Paused', 'On repair'
+      'Работает', 'Простаивает', 'На ремонте'
     ]
   end
 end

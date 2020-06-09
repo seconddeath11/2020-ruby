@@ -1,17 +1,17 @@
 <div class="container">
 <br>
-<h5> All routes </h5><br>
-<a href="<%= new_rout_path %>" class="btn btn-light">Add</a>
-<a href="<%= find_path %>" class="btn btn-light">Find a driver</a>
+<h5> Все маршруты </h5><br>
+<a href="<%= new_rout_path %>" class="btn btn-light">Добавить</a>
+<a href="<%= find_path %>" class="btn btn-light">Найти водителя</a>
 <br><br>
 <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">Number</th>
-      <th scope="col">Stops</th>
-      <th scope="col">Length</th>
-      <th scope="col">Buses needed</th>
-      <th> Functions </th>
+      <th scope="col">Номер</th>
+      <th scope="col">Количество остановок</th>
+      <th scope="col">Длина маршрута</th>
+      <th scope="col">Автобусов необходимо</th>
+      <th> Функции </th>
     </tr>
   </thead>
   <tbody>
@@ -21,7 +21,7 @@
       <td><%=rout.stops%></td>
       <td><%=rout.length %></td>
       <td><%=rout.buses %></td>
-      <td><a class="button" href="<%= path(rout, 'check') %>">Check</a></td>
+      <td><a class="button" href="<%= path(rout, 'check') %>">Проверить избыточность/дефицит</a></td>
     </tr>
     <%end%>
   </tbody>
