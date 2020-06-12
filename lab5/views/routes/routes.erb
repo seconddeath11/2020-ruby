@@ -8,8 +8,6 @@
   <thead>
     <tr>
       <th scope="col">Номер</th>
-      <th scope="col">Количество остановок</th>
-      <th scope="col">Длина маршрута</th>
       <th scope="col">Автобусов необходимо</th>
       <th> Функции </th>
     </tr>
@@ -18,10 +16,8 @@
   <% @routes.each do |rout|%>
     <tr>
       <td><%=rout.name %></td>
-      <td><%=rout.stops%></td>
-      <td><%=rout.length %></td>
       <td><%=rout.buses %></td>
-      <td><a class="button" href="<%= path(rout, 'check') %>">Проверить избыточность/дефицит</a></td>
+      <td><a class="button" href="<%= path(rout) %>">More</a></td>
     </tr>
     <%end%>
   </tbody>

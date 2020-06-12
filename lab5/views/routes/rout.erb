@@ -1,0 +1,8 @@
+<div class="container">
+<h3> Маршрут № <%= @rout.name%> </h3>
+<p> Количество остановок: <%= @rout.stops%></p>
+<p> Длина маршрута: <%= @rout.length%></p>
+<p> Автобусов необходимо: <%= @rout.buses%></p>
+<a class="button" href="<%= path(@rout, 'check') %>">Проверить избыточность/дефицит</a>
+      | <a class="button" href="<%= path(@rout, 'delete') %>">Удалить</a>
+      | <a class="button" href="<%= path(@rout, 'filter') %>">Фильтр по состоянию</a>

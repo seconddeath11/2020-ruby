@@ -1,11 +1,20 @@
 <div class="container">
+<h3> Найти автобус, на котором работает водитель </h3>
 <% form({ method: :get },{ obj: @parameters }) do |f| %>
     <div class="form-group">
       <%= f.input(:driver, type: :text, placeholder: 'Иванова')%>
     </div>
     <div class="form-group">
       <%= f.button(value: 'Найти', class: "btn btn-light") %>
-      <a href="<%= routes_path %>" class="btn btn-light">Отмена</a>
+      <a href="<%= routes_path %>" class="btn btn-light">Назад</a>
     </div>
 <% end %>
-<%= @number%>
+<div class="container">
+<%if @number && @number.negative?%>
+<p> Водитель не найден</p>
+<%end%>
+<% unless @number.nil? || @number.negative?%>
+<p> Водитель работает на автобусе № 
+<%= @number%> </p>
+<%end%>
+</div>

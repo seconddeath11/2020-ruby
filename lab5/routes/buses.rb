@@ -55,9 +55,9 @@ class App
 
         r.post do
           @ids = opts[:routes].ids.sort
-          @parameters = FormeWrapper.new(BusSchema.call(r.params))
+          @parameters = FormeWrapper.new(EditBusSchema.call(r.params))
           if @parameters.success?
-            opts[:books].update(@bus.number, @parameters)
+            opts[:buses].update(@bus, @parameters)
             r.redirect('/')
           else
             view('edit_bus')

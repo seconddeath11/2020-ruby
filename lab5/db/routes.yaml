@@ -24,3 +24,7 @@
   :stops: 7
   :length: 6
   :buses: 2
+- :name: 17
+  :stops: 6
+  :length: 2
+  :buses: 1

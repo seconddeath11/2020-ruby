@@ -1,0 +1,29 @@
+<div class='container'>
+<h3>Удаление маршрута № <%= @rout.name%> </h3>
+</div>
+<div class='container'>
+<p>Необходимо перенести все автобусы на другой маршрут</p>
+</div>
+<%form(@buses, { method: :post },{ obj: @parameters }) do |f| %>
+<table class="table table-striped container">
+  <thead>
+    <tr>
+      <th scope="col">Номер автобуса</th>
+      <th> Новый маршрут </th>
+    </tr>
+  </thead>
+  <tbody>
+  
+  <% @buses.each_with_index do |index, bus|%>
+    <tr>
+      <td><%= index%></td>
+      <td><%= f.inputs(:rout, type: :select, options: @ids) %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+<div class='container'>
+<%= f.button(value: 'Удалить и перенести', class: 'btn btn-danger')%>
+<a href="<%= buses_path %>" class='btn btn-ligth'>Отмена</a>
+</div>
+<%end%>

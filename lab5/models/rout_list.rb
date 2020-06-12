@@ -1,7 +1,9 @@
 # frozen_string_literal: true
-
+require 'forwardable'
 # List of all routes
 class RoutList
+  extend Forwardable
+  def_delegator :@routes, :each, :each_with_index
   def initialize(routes = [])
     @routes = routes.map do |rout|
       [rout.name, rout]
@@ -16,6 +18,8 @@ class RoutList
     @routes.values
   end
 
+ 
+
   def ids
     @routes.keys
   end
@@ -24,7 +28,7 @@ class RoutList
     @routes[id]
   end
 
-  def remove(number)
+  def delete(number)
     @routes.delete(number)
   end
 end

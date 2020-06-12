@@ -1,7 +1,9 @@
 # frozen_string_literal: true
-
+require 'forwardable'
 # List of all buses
 class BusList
+  extend Forwardable
+  def_delegator :@buses, :each, :each_with_index
   def initialize(buses = [])
     @buses = buses.map do |bus|
       [bus.number, bus]
@@ -36,8 +38,9 @@ class BusList
     @buses[id]
   end
 
-  def update(id, bus)
-    old_bus = @buses[id]
+  def update(old_bus, bus)
+    #old_bus = @buses[id]
+    p old_bus
     bus.to_h.each do |key, value|
       old_bus[key] = value
     end
@@ -47,6 +50,7 @@ class BusList
     @buses.each do |_index, bus|
       return bus.number if bus.name.split[0] == name
     end
+    -1
   end
 
   def check(number, buses)
@@ -54,11 +58,11 @@ class BusList
       buses -= 1 if bus.rout == number && bus.state == 'Работает'
     end
     if buses.positive?
-      'Дефицит автобусов'
+      "Дефицит автобусов - не хватает #{buses} автобусов"
     elsif buses.zero?
       'Столько, сколько нужно'
     else
-      'Избыток автобусов'
+      "Избыток автобусов - #{buses} лишних"
     end
   end
 end

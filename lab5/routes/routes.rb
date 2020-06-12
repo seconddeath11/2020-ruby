@@ -6,7 +6,11 @@ class App
   path :find, '/routes/find'
   path :new_rout, '/routes/new'
   path Rout do |rout, action|
-    "routes/#{rout.name}/#{action}"
+    if action
+    "#{rout.name}/#{action}"
+    else
+      "routes/#{rout.name}"
+    end
   end
 
   hash_branch('routes') do |r|
@@ -37,7 +41,7 @@ class App
     r.on 'find' do
       r.get do
         @parameters = FormeWrapper.new(DriverSchema.call(r.params))
-        @number = opts[:buses].find_driver(@parameters[:driver]) if @parameters.success?
+        @number = opts[:buses].find_driver(@parameters[:driver]) if @parameters[:driver]
         view('find_driver')
       end
     end
@@ -46,16 +50,23 @@ class App
       @rout = opts[:routes].find_by_id(id)
       next if @rout.nil?
 
+      r.is do
+        view('rout')
+      end
       r.on 'delete' do
         r.get do
           @parameters = {}
+          @buses = opts[:buses]
+          @ids = opts[:routes].ids.sort
+          @ids.delete(@rout.name)
           view('delete_rout')
         end
 
         r.post do
           @parameters = FormeWrapper.new(RoutDeleteSchema.call(r.params))
+          p @parameters
           if @parameters.success?
-            opts[:routes].delete(@bus.number)
+            opts[:routes].delete(@rout.name)
             r.redirect('/')
           else
             view('delete_rout')
@@ -67,6 +78,8 @@ class App
         @check = opts[:buses].check(@rout.name, @rout.buses)
         view('check_rout')
       end
+
+      
     end
   end
 end
