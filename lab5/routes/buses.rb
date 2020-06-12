@@ -21,21 +21,26 @@ class App
     end
 
     r.on 'new' do
+      @bad_number = false
+      @ids = opts[:routes].ids.sort
       r.get do
-        @ids = opts[:routes].ids.sort
-        @numbers = opts[:buses].numbers
         @read = false
         @parameters = {}
         view('new_bus')
       end
 
       r.post do
-        @ids = opts[:routes].ids.sort
+        @numbers = opts[:buses].numbers
         @parameters = FormeWrapper.new(BusSchema.call(r.params))
-        if @parameters.success?
+        if @parameters.success? && @numbers.include?(@parameters[:number]) == false
           opts[:buses].add(Bus.new(**@parameters.to_h))
           r.redirect('/')
         else
+          @bad_number = if @numbers.include?(@parameters[:number])
+                          true
+                        else
+                          false
+                        end
           view('new_bus')
         end
       end
@@ -57,7 +62,7 @@ class App
           @ids = opts[:routes].ids.sort
           @parameters = FormeWrapper.new(EditBusSchema.call(r.params))
           if @parameters.success?
-            opts[:buses].update(@bus, @parameters)
+            opts[:buses].update(@bus[:number], @parameters)
             r.redirect('/')
           else
             view('edit_bus')

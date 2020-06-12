@@ -1,6 +1,9 @@
 <% form({ method: :post },{ obj: @parameters }) do |f| %>
     <div class="form-group">
       <%= f.input(:number, type: :text, label: 'Номер автобуса', placeholder: '23', disabled: @read)%>
+      <%if @bad_number%>
+      <span> Этот номер занят </span>
+      <%end%>
     </div>
     <div class="form-group">
       <%= f.input( :consumption, type: :text, label: 'Расход бензина', placeholder: '25', disabled: @read)%>

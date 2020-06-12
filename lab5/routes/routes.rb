@@ -7,7 +7,7 @@ class App
   path :new_rout, '/routes/new'
   path Rout do |rout, action|
     if action
-    "#{rout.name}/#{action}"
+      "#{rout.name}/#{action}"
     else
       "routes/#{rout.name}"
     end
@@ -79,7 +79,19 @@ class App
         view('check_rout')
       end
 
-      
+      r.on 'filter' do
+        r.get do
+          @parameters = FormeWrapper.new(FilterBusesSchema.call(r.params))
+          @filtered_buses = if @parameters.success?
+                            opts[:buses].by_state(@rout.name, @parameters[:state])
+                             # @rout.buses_all.by_state(@parameters[:state])
+                            else
+                              opts[:buses].by_number(@rout.name)
+                              #@rout.buses_all
+                            end
+          view('filter_rout_buses')
+        end
+      end
     end
   end
 end

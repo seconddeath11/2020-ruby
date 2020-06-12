@@ -1,60 +1,67 @@
 # frozen_string_literal: true
+
 require 'forwardable'
 # List of all buses
 class BusList
   extend Forwardable
-  def_delegator :@buses, :each, :each_with_index
+  def_delegator :@buses, :each
   def initialize(buses = [])
-    @buses = buses.map do |bus|
-      [bus.number, bus]
-    end.to_h
+    @buses = buses
   end
 
   def add(bus)
-    @buses[bus.number] = bus
+    @buses.append(bus)
+    bus
   end
 
   def all
-    @buses.values
+    @buses.dup
   end
 
   def numbers
-    @buses.keys
+    @numbers = []
+    @buses.each do |bus|
+      @numbers.append(bus.number)
+    end
+    @numbers
   end
 
   def delete(number)
-    @buses.delete(number)
+    @buses.delete(find_by_id(number))
   end
 
-  def by_state(state)
+  def by_state(number, state)
     @buses.select do |bus|
-      next if bus.state != state
+      next if bus.state != state || bus.rout != number
 
       true
     end
   end
 
   def find_by_id(id)
-    @buses[id]
+    @buses.each do |bus|
+      next if bus.number != id
+
+      return bus
+    end
   end
 
   def update(old_bus, bus)
-    #old_bus = @buses[id]
-    p old_bus
+    new_bus = find_by_id(old_bus)
     bus.to_h.each do |key, value|
-      old_bus[key] = value
+      new_bus[key] = value
     end
   end
 
   def find_driver(name)
-    @buses.each do |_index, bus|
+    @buses.each do |bus|
       return bus.number if bus.name.split[0] == name
     end
     -1
   end
 
   def check(number, buses)
-    @buses.each do |_index, bus|
+    @buses.each do |bus|
       buses -= 1 if bus.rout == number && bus.state == 'Работает'
     end
     if buses.positive?
@@ -63,6 +70,14 @@ class BusList
       'Столько, сколько нужно'
     else
       "Избыток автобусов - #{buses} лишних"
+    end
+  end
+
+  def by_number(number)
+    @buses.select do |bus|
+      next if bus.number != number
+
+      true
     end
   end
 end

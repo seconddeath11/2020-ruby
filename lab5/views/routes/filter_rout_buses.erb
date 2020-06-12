@@ -1,0 +1,29 @@
+<div class="container">
+<div class='container'>
+<h3> Фильтрация автобусов </h3>
+<%form( { method: :get},{ obj: @parameters }) do |f| %><br>
+<%= f.input(:state, type: :select, options: StateType.all) %><br><br>
+<p><%= f.button(value: 'Фильтровать', class: 'btn btn-light')%>
+<a href="<%= routes_path %>" class="btn btn-ligth">Отмена</a></p>
+<%end%>
+</div><br>
+    <%if !@filtered_buses.empty?%>
+    <table class="table table-striped container">
+  <thead>
+    <tr>
+      <th scope="col">Номер автобуса</th>
+      <th> Состояние </th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @filtered_buses.each do |bus|%>
+    <tr>
+      <td><%= bus.number%></td>
+      <td><%= bus.state %></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>
+    <%end%>
+
+</div>

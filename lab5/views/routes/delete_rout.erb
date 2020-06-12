@@ -4,7 +4,7 @@
 <div class='container'>
 <p>Необходимо перенести все автобусы на другой маршрут</p>
 </div>
-<%form(@buses, { method: :post },{ obj: @parameters }) do |f| %>
+<%form( { method: :post },{ obj: @parameters }) do |f| %>
 <table class="table table-striped container">
   <thead>
     <tr>
@@ -14,9 +14,9 @@
   </thead>
   <tbody>
   
-  <% @buses.each_with_index do |index, bus|%>
+  <% @buses.each do |bus|%>
     <tr>
-      <td><%= index%></td>
+      <td><%= number%></td>
       <td><%= f.inputs(:rout, type: :select, options: @ids) %></td>
     </tr>
     <%end%>

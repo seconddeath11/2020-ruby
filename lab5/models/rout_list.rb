@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'forwardable'
 # List of all routes
 class RoutList
@@ -14,11 +15,13 @@ class RoutList
     @routes[rout.name] = rout
   end
 
+  def add_bus(bus)
+    @routes[bus.rout].buses_all.add(bus)
+  end
+
   def all
     @routes.values
   end
-
- 
 
   def ids
     @routes.keys
