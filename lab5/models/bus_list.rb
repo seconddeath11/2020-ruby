@@ -4,7 +4,7 @@ require 'forwardable'
 # List of all buses
 class BusList
   extend Forwardable
-  def_delegator :@buses, :each
+  def_delegator :@buses, :each, :each_with_index
   def initialize(buses = [])
     @buses = buses
   end
@@ -78,6 +78,24 @@ class BusList
       next if bus.number != number
 
       true
+    end
+  end
+
+  def by_rout(rout)
+    @buses.select do |bus|
+      next if bus.rout != rout
+
+      true
+    end
+  end
+
+  def update_rout(buses, routes)
+    enum = routes.to_enum
+    buses.each do |bus|
+      updated = find_by_id(bus.number)
+      all = enum.next[1]
+      updated.rout = all['rout'].to_i
+      updated.state = all['state']
     end
   end
 end

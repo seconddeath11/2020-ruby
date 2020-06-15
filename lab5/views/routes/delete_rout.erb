@@ -4,20 +4,22 @@
 <div class='container'>
 <p>Необходимо перенести все автобусы на другой маршрут</p>
 </div>
-<%form( { method: :post },{ obj: @parameters }) do |f| %>
+<%form(:method=>:post, :obj=>@parameters, :namespace=>'a') do |f| %>
 <table class="table table-striped container">
   <thead>
     <tr>
       <th scope="col">Номер автобуса</th>
       <th> Новый маршрут </th>
+      <th> Новое состояние </th>
     </tr>
   </thead>
   <tbody>
   
-  <% @buses.each do |bus|%>
+  <% f.each_obj(@buses) do |bus|%>
     <tr>
-      <td><%= number%></td>
-      <td><%= f.inputs(:rout, type: :select, options: @ids) %></td>
+      <td><%= bus.number%></td>
+      <td><%= f.input(:rout, type: :select, options: @ids) %></td>
+      <td><%= f.input(:state, type: :select, options: StateType.all) %></td>
     </tr>
     <%end%>
   </tbody>

@@ -3,5 +3,5 @@
 require 'dry-schema'
 
 RoutDeleteSchema = Dry::Schema.Params do
-  required(:rout).filled(:integer)
+  optional(:rout).filled
 end

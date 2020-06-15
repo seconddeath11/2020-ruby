@@ -4,7 +4,7 @@
 <%form( { method: :get},{ obj: @parameters }) do |f| %><br>
 <%= f.input(:state, type: :select, options: StateType.all) %><br><br>
 <p><%= f.button(value: 'Фильтровать', class: 'btn btn-light')%>
-<a href="<%= routes_path %>" class="btn btn-ligth">Отмена</a></p>
+<a href="/<%= path(@rout)%>" class="btn btn-ligth">Отмена</a></p>
 <%end%>
 </div><br>
     <%if !@filtered_buses.empty?%>
@@ -24,6 +24,8 @@
     <%end%>
   </tbody>
 </table>
-    <%end%>
+<%else%>
+<p> Автобусы не найдены </p>
+<%end%>
 
 </div>

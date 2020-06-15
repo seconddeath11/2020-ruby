@@ -1,30 +1,33 @@
 ---
 :buses:
-- :number: 33
-  :consumption: 20
-  :name: Петрова Анна
-  :rout: 10
-  :state: Работает
 - :number: 32
   :consumption: 21
   :name: Иванов Денис
-  :rout: 4
-  :state: Простаивает
+  :rout: 17
+  :state: Работает
 - :number: 3
   :consumption: 3
   :name: Волкова Ирина
   :rout: 4
   :state: Работает
+- :number: 33
+  :consumption: 20
+  :name: Петрова Анна
+  :rout: 10
+  :state: Простаивает
 :routes:
 - :name: 10
   :stops: 12
   :length: 25
   :buses: 5
+  :buses_all: 
 - :name: 4
   :stops: 7
   :length: 6
   :buses: 2
+  :buses_all: 
 - :name: 17
   :stops: 6
   :length: 2
   :buses: 1
+  :buses_all: 

@@ -25,13 +25,10 @@ class Store
     yaml_data = File.read(DATA_STORE)
     raw_data = Psych.load(yaml_data, symbolize_names: true)
     raw_data[:routes].each do |raw_rout|
-      rout = Rout.new(**raw_rout) #, :buses_all => BusList.new)
-      @rout_list.add(rout)
+      @rout_list.add(Rout.new(**raw_rout))
     end
     raw_data[:buses].each do |raw_bus|
-      bus = Bus.new(**raw_bus)
-      @bus_list.add(bus)
-      #@rout_list.add_bus(bus)
+      @bus_list.add(Bus.new(**raw_bus))
     end
   end
 

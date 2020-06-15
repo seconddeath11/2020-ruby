@@ -54,9 +54,9 @@ class App
         view('rout')
       end
       r.on 'delete' do
+        @buses = opts[:buses].by_rout(@rout.name).sort_by(&:number)
         r.get do
           @parameters = {}
-          @buses = opts[:buses]
           @ids = opts[:routes].ids.sort
           @ids.delete(@rout.name)
           view('delete_rout')
@@ -64,8 +64,8 @@ class App
 
         r.post do
           @parameters = FormeWrapper.new(RoutDeleteSchema.call(r.params))
-          p @parameters
           if @parameters.success?
+            opts[:buses].update_rout(@buses, r.params)
             opts[:routes].delete(@rout.name)
             r.redirect('/')
           else
@@ -83,11 +83,9 @@ class App
         r.get do
           @parameters = FormeWrapper.new(FilterBusesSchema.call(r.params))
           @filtered_buses = if @parameters.success?
-                            opts[:buses].by_state(@rout.name, @parameters[:state])
-                             # @rout.buses_all.by_state(@parameters[:state])
+                              opts[:buses].by_state(@rout.name, @parameters[:state])
                             else
                               opts[:buses].by_number(@rout.name)
-                              #@rout.buses_all
                             end
           view('filter_rout_buses')
         end
