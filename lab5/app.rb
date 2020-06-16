@@ -24,6 +24,11 @@ class App < Roda
   opts[:store] = Store.new
   opts[:buses] = opts[:store].bus_list
   opts[:routes] = opts[:store].rout_list
+
+  status_handler(404) do
+    view('not_found')
+  end
+  
   route do |r|
     r.public if opts[:serve_static]
     r.hash_branches
