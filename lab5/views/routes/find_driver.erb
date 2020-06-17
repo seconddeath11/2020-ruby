@@ -10,11 +10,12 @@
     </div>
 <% end %>
 <div class="container">
-<%if @number && @number.negative?%>
+<%if @number && @number.negative? && !@parameters[:driver].empty?%>
 <p> Водитель не найден</p>
 <%end%>
 <% unless @number.nil? || @number.negative?%>
-<p> Водитель работает на автобусе № 
+<p> Водитель работает на маршруте № 
 <%= @number%> </p>
 <%end%>
+
 </div>

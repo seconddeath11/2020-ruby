@@ -1,0 +1,30 @@
+<div class="container">
+<%if !@buses.empty?%>
+<div class="d-flex flex-row container">
+<%if @buses.length > 1%>
+<div>
+
+<img src="<%= url('/data.png') %>" />
+<div class=" d-flex flex-row justify-content-around">
+<%@buses.each do |bus|%>
+<span><%=bus.number%></span>
+<%end%>
+</div>
+</div>
+<%end%>
+<div class="container">
+<br>
+
+<span class="font-weight-bold">Автобус: потребление</span><br>
+<%@dat = @data.to_enum%>
+<%@buses.each do |bus|%>
+<span><%=bus.number%>: <%= @dat.next%></span><br>
+<%end%>
+
+</div>
+</div>
+<%else%>
+<span> На маршруте нет автобусов </span><br>
+<%end%>
+<a href="/<%= path(@rout)%>" class="btn btn-light">Назад</a>
+</div>

@@ -3,12 +3,7 @@
 </div>
 <%form({ method: :post },{ obj: @parameters }) do |f| %>
 <div class='container'>
-<div class='container d-flex flex-column'>
-<%= f.input(:confirmation, type: :checkbox, label: 'Да' )%>
-</div>
-<div class='container'>
 <%= f.button(value: 'Удалить', class: 'btn btn-danger')%>
 <a href="<%= buses_path %>" class='btn btn-ligth'>Отмена</a>
-</div>
 </div>
 <%end%>

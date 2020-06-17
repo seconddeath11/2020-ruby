@@ -22,17 +22,24 @@ class App
     end
 
     r.on 'new' do
+      @bad_number = false
       r.get do
         @parameters = {}
         view('new_rout')
       end
 
       r.post do
+        @numbers = opts[:routes].ids
         @parameters = FormeWrapper.new(RoutSchema.call(r.params))
-        if @parameters.success?
+        if @parameters.success? && @numbers.include?(@parameters[:name]) == false
           opts[:routes].add(Rout.new(**@parameters.to_h))
-          r.redirect('/')
+          r.redirect('/routes')
         else
+          @bad_number = if @numbers.include?(@parameters[:name])
+                          true
+                        else
+                          false
+                        end
           view('new_rout')
         end
       end
@@ -50,11 +57,11 @@ class App
       @rout = opts[:routes].find_by_id(id)
       next if @rout.nil?
 
+      @buses = opts[:buses].by_rout(@rout.name).sort_by(&:number)
       r.is do
         view('rout')
       end
       r.on 'delete' do
-        @buses = opts[:buses].by_rout(@rout.name).sort_by(&:number)
         r.get do
           @parameters = {}
           @ids = opts[:routes].ids.sort
@@ -67,7 +74,7 @@ class App
           if @parameters.success?
             opts[:buses].update_rout(@buses, r.params)
             opts[:routes].delete(@rout.name)
-            r.redirect('/')
+            r.redirect('/routes')
           else
             view('delete_rout')
           end
@@ -85,9 +92,17 @@ class App
           @filtered_buses = if @parameters.success?
                               opts[:buses].by_state(@rout.name, @parameters[:state])
                             else
-                              opts[:buses].by_number(@rout.name)
+                              @buses
                             end
           view('filter_rout_buses')
+        end
+      end
+
+      r.on 'statistics' do
+        r.get do
+          @data = @rout.statistics(@buses)
+          Gas.image(@buses, @data.to_enum)
+          view('gas_statistics')
         end
       end
     end

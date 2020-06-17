@@ -77,13 +77,8 @@ class App
         end
 
         r.post do
-          @parameters = FormeWrapper.new(BusDeleteSchema.call(r.params))
-          if @parameters.success?
-            opts[:buses].delete(@bus.number)
-            r.redirect('/')
-          else
-            view('delete_bus')
-          end
+          opts[:buses].delete(@bus.number)
+          r.redirect('/')
         end
       end
     end

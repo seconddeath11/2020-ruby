@@ -1,6 +1,7 @@
 <div class='container'>
 <h3>Удаление маршрута № <%= @rout.name%> </h3>
 </div>
+<%if !@buses.empty?%>
 <div class='container'>
 <p>Необходимо перенести все автобусы на другой маршрут</p>
 </div>
@@ -26,6 +27,14 @@
 </table>
 <div class='container'>
 <%= f.button(value: 'Удалить и перенести', class: 'btn btn-danger')%>
-<a href="<%= buses_path %>" class='btn btn-ligth'>Отмена</a>
+<a href="<%= routes_path %>" class='btn btn-ligth'>Отмена</a>
 </div>
+<%end%>
+<%else%>
+<%form({ method: :post },{ obj: @parameters }) do |f| %>
+<div class='container'>
+<%= f.button(value: 'Удалить', class: 'btn btn-danger')%>
+<a href="<%= routes_path %>" class='btn btn-ligth'>Отмена</a>
+</div>
+<%end%>
 <%end%>

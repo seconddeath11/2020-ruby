@@ -2,6 +2,9 @@
   <div class="container">
     <div class="form-group">
       <%= f.input(:name, type: :text, label: 'Номер маршрута', placeholder: '23')%>
+      <%if @bad_number%>
+      <span> Этот номер занят </span>
+      <%end%>
     </div>
     <div class="form-group">
       <%= f.input( :stops, type: :text, label: 'Количество остановок', placeholder: '15')%>

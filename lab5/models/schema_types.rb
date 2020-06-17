@@ -6,5 +6,5 @@ require 'dry-types'
 module SchemaTypes
   include Dry.Types
 
-  StrippedString = self::String.constructor(&:strip)
+  StrippedString = self::String.constructor(&:strip).constructor(&:capitalize)
 end

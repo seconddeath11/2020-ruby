@@ -4,6 +4,7 @@
 <p> Длина маршрута: <%= @rout.length%></p>
 <p> Автобусов необходимо: <%= @rout.buses%></p>
 <a class="btn btn-light" href="<%= path(@rout, 'check') %>">Проверить избыточность/дефицит</a>
-       <a class="btn btn-light" href="<%= path(@rout, 'delete') %>">Удалить</a>
+       <a class="btn btn-light" href="<%= path(@rout, 'delete') %>">Удалить</a><br><br>
        <a class="btn btn-light" href="<%= path(@rout, 'filter') %>">Фильтр по состоянию</a>
+       <a class="btn btn-light" href="<%= path(@rout, 'statistics') %>">Статистика</a>
        <a class="btn btn-light" href="<%= routes_path %>">Назад</a>
