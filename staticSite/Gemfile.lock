@@ -13,7 +13,9 @@ GEM
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
       http_parser.rb (~> 0.6.0)
+    eventmachine (1.2.7)
     eventmachine (1.2.7-x64-mingw32)
+    ffi (1.12.2)
     ffi (1.12.2-x64-mingw32)
     http_parser.rb (0.6.0)
     listen (3.2.1)
@@ -29,7 +31,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    rexml (3.2.4)
+    rexml (3.2.5)
     rubocop (0.83.0)
       parallel (~> 1.10)
       parser (>= 2.7.0.1)
@@ -42,6 +44,7 @@ GEM
 
 PLATFORMS
   x64-mingw32
+  x86_64-linux
 
 DEPENDENCIES
   adsf
